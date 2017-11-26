@@ -5,3 +5,4 @@ config.php
 admin/config.php
 adminer-4.3.0-mysql.php
 .idea
+error_log
