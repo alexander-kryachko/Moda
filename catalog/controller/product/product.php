@@ -324,6 +324,7 @@ class ControllerProductProduct extends Controller {
 
 			if ($product_info['image']) {
 				$data['popup'] = 'image/'.$product_info['image'];
+				//$data['popup'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));;
 			} else {
 				$data['popup'] = '';
 			}
@@ -340,7 +341,8 @@ class ControllerProductProduct extends Controller {
 
 			foreach ($results as $result) {
 				$data['images'][] = array(
-					'popup' => 'image/'.$result['image'],
+					'original' => 'image/'.$result['image'],
+					'popup' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')),
 					'thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'))
 				);
 			}

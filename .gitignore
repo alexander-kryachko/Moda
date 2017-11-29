@@ -6,3 +6,6 @@ admin/config.php
 adminer-4.3.0-mysql.php
 .idea
 error_log
+.htaccess
+crossdomain.xml
+robots.txt

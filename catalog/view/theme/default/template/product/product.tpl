@@ -24,34 +24,46 @@
 		<?php } else { ?>
 		<?php $class = 'col-xs-8'; ?>
 		<?php } ?>
-		<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 thumb">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 thumb">
 			<button type="button" data-toggle="tooltip" class="btn btn-default wishlist<?php if ($issetwshlist) { ?> active<?php } ?>" title="<?php echo $button_wishlist; ?>" onclick="wishlist.add('<?php echo $product_id; ?>');"><i class="pe-7s-like"></i></button>
 			<?php if ($thumb || $images) { ?>
 				<ul class="thumbnails">
-					<?php if($special_end > 0):?>
-						<span class="counter" id="counter_<?php print $product_id;?>_product"></span>
-						<script>counter($('#counter_<?php print $product_id?>_product'), <?php print $special_end; ?>);</script>
-					<?php endif;?>
-					<?php print $promo_tag_product_top_right; ?>
-					<?php if ($thumb) { ?>
-						<li><a class="thumbnail gallery-element" href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>">
-								<img id="zoom_mw" data-zoom-image="<?=$popup?>" src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" class="img_main" />
-							</a></li>
-					<?php } ?>
-					<?php if ($images) { ?>
-						<?php foreach ($images as $image) { ?>
-							<li>
-								<a class="thumbnail gallery-element" href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>"> <img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
-							</li>
-						<?php } ?>
-					<?php } ?>
+
+
 				</ul>
 				<script>
-					$("#zoom_mw").elevateZoom({scrollZoom : true});
+
+					$(window).load(function(){
+						var res = '';
+						<?php if($special_end > 0):?>
+						res += '<span class="counter" id="counter_<?php print $product_id;?>_product"></span>';
+						counter($('#counter_<?php print $product_id?>_product'), <?php print $special_end; ?>);
+					<?php endif;?>
+						res += '<?echo $promo_tag_product_top_right; ?>';
+					<?php if ($thumb) { ?>
+						res += '<li><a class="thumbnail gallery-element" href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>">';
+						res += '<img id="zoom_mw" data-zoom-image="<?=$popup?>" src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" class="img_main" />';
+						res += '</a></li>';
+						$('.thumbnails').append(res);
+					<?php } ?>
+						setTimeout(function(){
+							<?php if ($images) { ?>
+							var out = '';
+							<?php foreach ($images as $image) { ?>
+							out += '<li>';
+							out += '<a class="thumbnail gallery-element" href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>"> <img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>';
+							out += '</li>';
+							<?php } ?>
+							$('.thumbnails').append(out);
+							<?php } ?>
+							$("#zoom_mw").elevateZoom({scrollZoom : true});
+						}, 500);
+
+					})
 				</script>
 			<?php } ?>
 		</div>
-		<div id="product" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 product">
+		<div id="product" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 product">
 			<h1><?=$heading_title?></h1>
 			<span class="article"><?=$text_article_q.' '.$sku?></span>
 			<?php if ($review_status) { ?>

@@ -37,11 +37,12 @@
             <td class="qc-image <?php echo (!$data['columns']['image'])?  'qc-hide' : '' ?> ">
               <i class="fa fa-trash-o" data-toggle="tooltip" title="Удалить"></i>
               <a  href="<?php echo $product['href']; ?>" data-container="body" data-toggle="popover" data-placement="top" data-content='<img src="<?php echo $product['image']; ?>" />' data-trigger="hover">
-                <img src="<?php echo $product['thumb']; ?>" />
+                <img src="<?php echo $product['thumb']; ?>" style="float: right" />
               </a>
               <i rel="tooltip" data-help="'.$field['tooltip'] .'"></i>
             </td>
             <td class="qc-name  <?php echo (!$data['columns']['name'])?  'qc-hide' : '' ?> ">
+              <div class="input-group">
               <a href="<?php echo $product['href']; ?>" <?php echo (!$data['columns']['image'])?  'rel="popup" data-help=\'<img src="'.$product['image'].'"/>\'' : '' ?>>
 
                 <?php echo $product['name']; ?> <?php echo (!$product['stock'])? '<span class="out-of-stock">***</span>' : '' ?>
@@ -51,6 +52,7 @@
               <?php } ?>
               <div class="qc-name-model <?php echo (!$data['columns']['model'])?  'qc-hide' : '' ?>"><span class="title"><?php echo $column_model; ?>:</span> <span class="text"><?php echo $product['model']; ?></span></div>
               <div class="qc-name-price <?php echo (!$data['columns']['price'] || $show_price)?  'qc-hide' : ''; ?>"><span class="title"><?php echo $column_price; ?>:</span> <span class="text"><?php echo $product['price']; ?></span></div>
+              </div>
             </td>
             <td class="qc-model <?php echo (!$data['columns']['model'])?  'qc-hide' : '' ?> "><?php echo $product['model']; ?></td>
             <td class="qc-quantity  <?php echo (!$data['columns']['quantity'])?  'qc-hide' : '' ?> ">

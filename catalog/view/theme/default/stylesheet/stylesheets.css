@@ -571,11 +571,11 @@ header > .container > #menu > ul > li.sale a:after {
   right: -2px;
   top: -2px;*/
 }
-header > .container > #menu > ul > li:hover a {
+header > .container > #menu > ul > li:hover a, header > .container > #menu > ul > li.active a {
   color: #000;
   text-decoration: none;
 }
-header > .container > #menu > ul > li:hover a:before {
+header > .container > #menu > ul > li:hover a:before, header > .container > #menu > ul > li.active a:before {
   content: '';
   bottom: 10px;
   opacity: 1;
@@ -2765,7 +2765,7 @@ body.checkout-success #content .text_message a:hover {
   margin-top: -7px;
 }
 #cart > .dropdown-menu > li:first-child .thumb {
-  width: 74px;
+  width: 150px;
 }
 #cart > .dropdown-menu > li:first-child .thumb a {
   display: inline-block;
@@ -4430,7 +4430,7 @@ html[lang="en"] .modal.cart-popup .modal-body .content-inside .right-inside .che
   list-style: none;
 }
 .top-cart img{
-  width: 300px;
+
 }
 #cart .dropdown-menu li > div{
   width: auto !important;
@@ -4439,4 +4439,32 @@ html[lang="en"] .modal.cart-popup .modal-body .content-inside .right-inside .che
   /*max-height: 200px;*/
   position: relative;
   overflow: hidden;
+}
+#column-left .navbar-nav{
+  width: 100%;
+}
+#column-left .navbar-nav li{
+  float: none;
+}
+#column-left .navbar-nav li a{
+  font-size: 17px;
+  color: #333;
+  text-decoration: none;
+}
+#column-left .navbar-nav li a i{
+  font-style: normal;
+}
+#column-left .navbar-nav li.active a{
+  background-color: #eee;
+}
+#column-left .navbar-nav li.sale a{
+  color: #e40f0f;
+}
+header #cart li{
+  position: relative;
+}
+header #cart .thumb,
+header #cart .product-name,
+header #cart  .product-quantity{
+  margin-left: 40px;
 }

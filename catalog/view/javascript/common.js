@@ -96,6 +96,8 @@ $(window).scroll(function() {
 		$('header #menu #wishlistCount').show();
 /*		$('#menu #dropdownMenu1').wrap('<div class="call-min"></div>');
 		$('.call-min').append(phone);*/
+
+		$('body.checkout-checkout #cart_wrap').css({'position':'fixed','top':'26px'});
 	}
 	if( $(window).scrollTop()<=61) {
 		$('header').removeClass('fixed');
@@ -109,6 +111,8 @@ $(window).scroll(function() {
 		$('header #menu #wishlistCount').hide();
 
 		min = false;//шапка в обычном режиме
+
+		$('body.checkout-checkout #cart_wrap').css({'position':'static','top':'0'});
 	}
 });
 
@@ -236,13 +240,11 @@ var myScroll;
 var i_loader;
 
 function loadeds () {
-	alert(i_loader);
 	if ( i_loader !=  true ) {
 		setTimeout(function(){
 			//myScroll = new IScroll('#add-scroll', {mouseWheel: true, scrollbars: true, mouseWheelSpeed: 100});
 			myScroll = new IScroll('#add-scroll', {mouseWheel: true, scrollbars: true, mouseWheelSpeed: 100});
 			i_loader = true;
-			alert(4)
 		}, 2000);
 
 	}

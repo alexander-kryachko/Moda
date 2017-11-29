@@ -88,7 +88,6 @@
 					</div>
 					<div class="caption">
 						<h4><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
-						<div class="model"><?php echo $text_model.' '.$product['model']; ?></div>
 						<?php if ($product['price']) { ?>
 							<p class="price">
 								<?php if (!$product['special']) { ?>
