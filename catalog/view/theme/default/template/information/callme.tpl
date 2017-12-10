@@ -17,12 +17,12 @@
                                 </div>
                                 <div class="form-group required row">
                                     <div class="col-sm-12">
-                                        <input type="text" name="phone" value="" id="callback-phone" class="form-control default" placeholder="+1 (XXX) XX-XX-XXX" />
+                                        <input type="text" name="phone" value="" id="callback-phone" class="form-control default" placeholder="+XX (XXX) XX-XX-XXX" />
                                     </div>
                                     <script>
-                                        $('#callback-phone').mask('+1 (999) 999-99-99');
+                                        $('#callback-phone').mask('+99 (999) 999-99-99');
                                         $(document).ready(function(){
-                                            $('#callback-phone').mask('+1 (999) 999-99-99');
+                                            $('#callback-phone').mask('+99 (999) 999-99-99');
                                         });
                                     </script>
                                 </div>

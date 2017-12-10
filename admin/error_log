@@ -7,3 +7,10 @@
 [13-Sep-2016 22:11:20 UTC] PHP Warning:  mysqli::mysqli(): (HY000/1226): User 'db_memoda2' has exceeded the 'max_user_connections' resource (current value: 30) in /home/basel7771/public_html/memoda.com.ua/system/library/db/mysqli.php on line 7
 [13-Sep-2016 22:11:20 UTC] PHP Notice:  Error: Could not make a database link (1226) User 'db_memoda2' has exceeded the 'max_user_connections' resource (current value: 30) in /home/basel7771/public_html/memoda.com.ua/system/library/db/mysqli.php on line 10
 [19-Oct-2017 11:40:07 UTC] PHP Parse error:  syntax error, unexpected 'define' (T_STRING) in /home/basel7771/public_html/memodafurs.com/admin/config.php on line 32
+[02-Dec-2017 15:06:30 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting ',' or ')' in /home/basel7771/public_html/memodafurs.com/admin/controller/module/reviews.php on line 76
+[02-Dec-2017 15:30:47 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting ',' or ')' in /home/basel7771/public_html/memodafurs.com/admin/controller/module/reviews.php on line 76
+[02-Dec-2017 15:42:52 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting ',' or ';' in /home/basel7771/public_html/memodafurs.com/admin/view/template/module/reviews/form.tpl on line 45
+[02-Dec-2017 16:20:58 UTC] PHP Parse error:  syntax error, unexpected ''name' (T_ENCAPSED_AND_WHITESPACE), expecting ']' in /home/basel7771/public_html/memodafurs.com/admin/view/template/module/reviews/form.tpl on line 28
+[08-Dec-2017 13:19:49 UTC] PHP Fatal error:  Call to undefined method ControllerPaymentLiqPay::render() in /home/basel7771/public_html/memodafurs.com/admin/controller/payment/liqpay.php on line 204
+[08-Dec-2017 13:20:14 UTC] PHP Fatal error:  Call to undefined method ControllerPaymentLiqPay::render() in /home/basel7771/public_html/memodafurs.com/admin/controller/payment/liqpay.php on line 204
+[08-Dec-2017 16:02:12 UTC] PHP Fatal error:  Call to undefined method ControllerPaymentLiqPay::render() in /home/basel7771/public_html/memodafurs.com/admin/controller/payment/liqpay.php on line 204

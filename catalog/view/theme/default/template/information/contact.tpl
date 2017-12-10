@@ -19,7 +19,7 @@
       <div class="row contactbox">
         <div class="col-lg-offset-3 col-md-offset-3 text-right col-lg-3 col-md-3 col-sm-12 col-xs-12">
           <div class="phone">
-            <span><b>Тел.</b><?=$telephone?></span>
+            <span><b>Tel.</b><?=$telephone?></span>
             <?php if ($telephone_2) { ?><span><?=$telephone_2?></span><?php } ?>
             <?php if ($telephone_3) { ?> <span><?=$telephone_3?></span><?php } ?>
             <?php if ($telephone_4) { ?><span><?=$telephone_4?></span><?php } ?>
@@ -30,7 +30,7 @@
         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
           <span><?=$email_c?></span>
           <address><?=$address?></address>
-          <span>Skype: <a href="skype:<?=$skype?>?call" class="skype"><?=$skype?></a></span>
+<!--          <span>Skype: <a href="skype:<?/*=$skype*/?>?call" class="skype"><?/*=$skype*/?></a></span>-->
           <?php if ($open) { ?><span><?php echo $text_open; ?>: <?php echo $open; ?></span><?php } ?>
         </div>
       </div>
@@ -88,77 +88,4 @@
       <?php echo $content_bottom; ?></div>
     <?php echo $column_right; ?></div>
 </div>
-<script type="text/javascript">
-  function initialize() {
-
-    var MY_MAPTYPE_ID = 'custom_style';
-
-    var featureOpts = [
-      {
-        "stylers": [
-          { "weight": 3 },
-          { "saturation": -100 }
-        ]
-      },{
-        "featureType": "road.arterial",
-        "elementType": "labels",
-        "stylers": [
-          { "visibility": "on" }
-        ]
-      },{
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [
-          { "color": "#6f6e6f" },
-          { "weight": 2 },
-          { "lightness": 60 }
-        ]
-      },{
-        "featureType": "transit",
-        "stylers": [
-          { "weight": 4 },
-          { "hue": "#000000" },
-          { "saturation": 50 }
-        ]
-      },{
-        "featureType": "administrative",
-        "elementType": "labels",
-        "stylers": [
-          { "color": "#000000" },
-          { "lightness": -23 },
-          { "weight": 0.4 }
-        ]
-      }
-    ];
-
-    var mapOptions = {
-      zoom: 17,
-      scrollwheel: false,
-      center: new google.maps.LatLng(49.9998411, 36.2437855),
-      mapTypeId: MY_MAPTYPE_ID
-    };
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
-
-    var image = 'label.png';
-    var myLatLng = new google.maps.LatLng(49.9998411, 36.2437855);
-    var beachMarker = new google.maps.Marker({
-      position: myLatLng,
-      map: map,
-      icon: image
-    });
-
-    var styledMapOptions = {
-      name: 'Custom Style'
-    };
-
-    var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
-
-    map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
-
-  }
-
-  google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-<div id="map-canvas" class="mapBlock"></div>
 <?php echo $footer; ?>

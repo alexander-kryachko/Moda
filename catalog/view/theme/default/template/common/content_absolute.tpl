@@ -11,7 +11,7 @@
             <!--<span><?/*=$config_telephone*/?></span>-->
             <span><?=$config_email?></span>
             <!--<address><?/*=$config_address*/?></address>-->
-            <span id="callme-button"><?=$text_a_callme?></span>
+
         </div>
         <div class="loginBlock">
             <a href="<?=$account?>"><?=$text_login?></a>
@@ -19,7 +19,6 @@
         </div>
         <ul class="social-net">
             <li class="inst"><a href="#"></a></li>
-            <li class="fb"><a href="#"></a></li>
         </ul>
     </div>
 </div>

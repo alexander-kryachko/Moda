@@ -40,7 +40,6 @@ class ControllerCommonHeader extends Controller {
 		} else {
 			$data['logo'] = '';
 		}
-
 		$this->load->language('common/header');
 
 		$data['text_home'] = $this->language->get('text_home');

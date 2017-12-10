@@ -100,11 +100,12 @@
                 <div class="product-thumb transition">
                   <div class="image">
                     <a href="<?php echo $product['href']; ?>">
+                      <?php if ($product['discount']) { ?><div class="top-seller"></div><?php }?>
                       <?php if($product['special_end'] > 0):?>
                         <span class="counter<?php if($product['add_images']):?> and_images<?php endif;?>" id="counter_<?php print $product['product_id'];?>_featured"></span>
                         <script>counter($('#counter_<?php print $product['product_id']?>_featured'), <?php print $product['special_end']; ?>);</script>
                       <?php endif;?>
-                      <?php echo $product['promotag']; ?>
+                      <?php if($product['percent']):?><div class="percent">-<?php echo $product['percent']; ?>%</div><?php endif;?>
                       <img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" class="img-responsive" />
                     </a>
                     <?php $i = 0; if ($product['add_images']) { ?>
@@ -118,23 +119,24 @@
                   </div>
                   <div class="caption">
                     <h4><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
-                    <div class="model"><?php echo $text_model.' '.$product['model']; ?></div>
                     <?php if ($product['price']) { ?>
                       <p class="price">
-                        <?php if (!$product['special']) { ?>
+                        <?php if (!$product['discount']) { ?>
                           <span class="price-default"><?php echo $product['price']; ?></span>
-                        <?php } else { ?>
-                          <span class="price-new"><?php echo $product['special']; ?></span><span class="price-old"><?php echo $product['price']; ?></span>
-                        <?php } ?>
+                        <?php }else{?>
+                            <span class="price-old"><?php echo $product['price']; ?></span>
+                            <span class="price-new"><?php echo $product['discount']; ?></span>
+                          <p class="economy">You save <?php echo $product['save']; ?></p>
+                        <?php }?>
                       </p>
                     <?php } ?>
                   </div>
-                  <div class="button-group hidden">
-                    <button type="button" <?php if ( $product['quantity'] >= '1' ) { ?>onclick="cart.add('<?php echo $product['product_id']; ?>');"<?php } ?>><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
-                    <button type="button" data-toggle="tooltip" title="<?php echo $button_wishlist; ?>" onclick="wishlist.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-heart"></i></button>
-                    <button type="button" data-toggle="tooltip" title="<?php echo $button_compare; ?>" onclick="compare.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-exchange"></i></button>
-                    <a href="<?php echo $product['href']; ?>" data-page="fast-review" data-title="<?php echo $product['name']; ?>" data-toggle="modal" data-target="#myModal" class="ajaxPage" class="ajaxPage"><i class="fa fa-eye"></i></a>
-                  </div>
+
+                  <button class="add-to-cart btn btn-lg btn-block" type="button" <?php if ( $product['quantity'] >= '1' ) { ?>onclick="cart.add('<?php echo $product['product_id']; ?>');"<?php } ?> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+                  <button class="hidden" type="button" data-toggle="tooltip" title="<?php echo $button_wishlist; ?>" onclick="wishlist.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-heart"></i></button>
+                  <button class="hidden" type="button" data-toggle="tooltip" title="<?php echo $button_compare; ?>" onclick="compare.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-exchange"></i></button>
+                  <a class="hidden" href="<?php echo $product['href']; ?>" data-page="fast-review" data-title="<?php echo $product['name']; ?>" data-toggle="modal" data-target="#myModal" class="ajaxPage" class="ajaxPage"><i class="fa fa-eye"></i></a>
+
                 </div>
               </div>
             <?php } ?>

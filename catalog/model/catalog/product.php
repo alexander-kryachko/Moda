@@ -105,7 +105,8 @@ class ModelCatalogProduct extends Model {
 				'image'            => $query->row['image'],
 				'manufacturer_id'  => $query->row['manufacturer_id'],
 				'manufacturer'     => $query->row['manufacturer'],
-				'price'            => ($query->row['discount'] ? $query->row['discount'] : $query->row['price']),
+				'discount'            => $query->row['discount'],
+				'price'            => $query->row['price'],
 				'special'          => $query->row['special'],
 				'percent'          => $query->row['percent'],
 				'special_end'	   => $special_end,
@@ -296,7 +297,9 @@ class ModelCatalogProduct extends Model {
 		foreach ($query->rows as $result) {
 			$product_data[$result['product_id']] = $this->getProduct($result['product_id']);
 		}
-
+/*echo "<pre>";
+		var_dump($product_data);
+echo "</pre>";*/
 		return $product_data;
 	}
 
@@ -415,6 +418,7 @@ class ModelCatalogProduct extends Model {
 	}
 
 	public function getBestSellerProducts($limit) {
+
 		$product_data = $this->cache->get('product.bestseller.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . $this->config->get('config_customer_group_id') . '.' . (int)$limit);
 
 		if (!$product_data) {

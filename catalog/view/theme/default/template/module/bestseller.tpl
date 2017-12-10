@@ -24,13 +24,13 @@
           </div>
           <div class="caption">
             <h4><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
-            <div class="model"><?php echo $text_model.' '.$product['model']; ?></div>
             <?php if ($product['price']) { ?>
               <p class="price">
-                <?php if (!$product['special']) { ?>
+                <?php if (!$product['discount']) { ?>
                   <span class="price-default"><?php echo $product['price']; ?></span>
                 <?php } else { ?>
-                  <span class="price-new"><?php echo $product['special']; ?></span><span class="price-old"><?php echo $product['price']; ?></span>
+                  <span class="price-old"><?php echo $product['price']; ?></span><span class="price-new"><?php echo $product['discount']; ?></span>
+                  <p class="economy">You save <?php echo $product['save']; ?></p>
                 <?php } ?>
               </p>
             <?php } ?>

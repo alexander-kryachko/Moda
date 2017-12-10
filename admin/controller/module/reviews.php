@@ -329,6 +329,7 @@ class ControllerModuleReviews extends Controller {
 			$data['topics'][] = array(
 				'faq_id'     => $result['faq_id'],
 				'title'      => $result['title'],
+				'date'      => $result['date'],
 				'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
 				'sort_order' => $result['sort_order'],
 				'selected'   => isset($this->request->post['selected']) && in_array($result['faq_id'], $this->request->post['selected']),
@@ -480,6 +481,14 @@ class ControllerModuleReviews extends Controller {
 			$data['status'] = $faq_info['status'];
 		} else {
 			$data['status'] = '';
+		}
+
+		if (isset($this->request->post['date'])) {
+			$data['date'] = $this->request->post['date'];
+		} elseif (isset($faq_info)) {
+			$data['date'] = $faq_info['date'];
+		} else {
+			$data['date'] = '';
 		}
 
 		if (isset($this->request->post['sort_order'])) {

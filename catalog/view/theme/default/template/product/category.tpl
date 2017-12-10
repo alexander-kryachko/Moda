@@ -7,7 +7,7 @@
 	<li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
 	<?php } ?>
 	</ul>
-	<?php if ( strlen($short_description) <= '15' || $config_catagory_product == '0') { ?><h1><span><?php echo $heading_title; ?></span></h1><?php } ?>
+	<?php if($category_id != 125){ ?><?php if ( strlen($short_description) <= '15' || $config_catagory_product == '0') { ?><h1><span><?php echo $heading_title; ?></span></h1><?php } ?><?php } ?>
 	<div class="row">
 		<?php if ($products && ( !$categories || $config_catagory_product_child == '0' ) ) { echo $column_left; } ?>
 	<?php if ( ( $column_left && $column_right ) && ( !$categories || $config_catagory_product_child == '0' )  ) { ?>
@@ -42,7 +42,11 @@
 				<?php } ?>
 			</div>
 		<?php } ?>
-
+		<?php if($category_id == 125){ ?>
+			<div class="christmas">
+				<img class="img-responsive" src="/image/christmas.jpg" alt="Christmas">
+			</div>
+		<?php }?>
 		<?php if ($products && ( !$categories || $view == '0' ) ) { ?>
 		<div class="row editProduct">
 			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 sortBlock text-right">
@@ -70,6 +74,7 @@
 				<div class="product-thumb transition">
 					<div class="image">
 						<a href="<?php echo $product['href']; ?>">
+							<?php if ($product['discount']) { ?><div class="top-seller"></div><?php }?>
 							<?php if($product['special_end'] > 0):?>
 								<span class="counter<?php if($product['add_images']):?> and_images<?php endif;?>" id="counter_<?php print $product['product_id'];?>_featured"></span>
 								<script>counter($('#counter_<?php print $product['product_id']?>_featured'), <?php print $product['special_end']; ?>);</script>
@@ -90,11 +95,13 @@
 						<h4><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
 						<?php if ($product['price']) { ?>
 							<p class="price">
-								<?php if (!$product['special']) { ?>
-									<span class="price-default"><?php echo $product['price']; ?></span>
-								<?php } else { ?>
-									<span class="price-new"><?php echo $product['special']; ?></span><span class="price-old"><?php echo $product['price']; ?></span>
-								<?php } ?>
+								<?php if (!$product['discount']) { ?>
+								<span class="price-default"><?php echo $product['price']; ?></span>
+								<?php }else{?>
+									<span class="price-old"><?php echo $product['price']; ?></span>
+									<span class="price-new"><?php echo $product['discount']; ?></span>
+									<p class="economy">You save <?php echo $product['save']; ?></p>
+								<?php }?>
 							</p>
 						<?php } ?>
 					</div>

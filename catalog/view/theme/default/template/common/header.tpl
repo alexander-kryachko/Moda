@@ -118,6 +118,7 @@
       <div class="row hidden">
         <div class="col-sm-4">
           <div id="logo">
+
             <?php if ($logo) { ?>
               <a href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" class="img-responsive" /></a>
             <?php } else { ?>

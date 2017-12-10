@@ -40,6 +40,14 @@ class ControllerModuleBestSeller extends Controller {
 					$special = false;
 				}
 
+				if ((float)$result['discount']) {
+					$discount = $this->currency->format($this->tax->calculate($result['discount'], $result['tax_class_id'], $this->config->get('config_tax')));
+					$save = $this->currency->format($this->tax->calculate($result['price'] - $result['discount'], $result['tax_class_id'], $this->config->get('config_tax')));
+				} else {
+					$discount = false;
+					$save = false;
+				}
+
 				if ($this->config->get('config_tax')) {
 					$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price']);
 				} else {
@@ -113,6 +121,8 @@ class ControllerModuleBestSeller extends Controller {
 					'price'       => $price,
 					'percent'     => $percent,
 					'special'     => $special,
+					'discount'     => $discount,
+					'save'		    => $save,
 					'special_end' => $special_end,
 					'tax'         => $tax,
 					'rating'      => $rating,

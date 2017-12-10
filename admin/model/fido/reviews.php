@@ -1,17 +1,31 @@
 <?php
 class ModelFidoReviews extends Model {
 	public function addFaq($data) {
-		$this->db->query("INSERT INTO ". DB_PREFIX . "reviews SET topic_id = '" . (int)$data['topic_id'] . "', status = '" . (int)$data['status'] . "', sort_order = '" . (int)$data['sort_order'] . "'");
+
+
+
+		$sql = "INSERT INTO ". DB_PREFIX . "reviews SET topic_id = '" . (int)$data['topic_id'] . "', status = '" . (int)$data['status'] . "', sort_order = '" . (int)$data['sort_order'] . "'";
+
+		if(!empty($data['date'])){
+			$sql .= ", date = '" . $this->db->escape($data['date']) . "'";
+		}
+
+		$this->db->query($sql);
+
 		$faq_id = $this->db->getLastId(); 
 		foreach ($data['faq_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "reviews_description SET
+			$sql = "INSERT INTO " . DB_PREFIX . "reviews_description SET
 				faq_id = '" . (int)$faq_id . "',
 				language_id = '" . (int)$language_id . "',
 				title = '" . $this->db->escape($value['title']) . "',
 				meta_description = '" . $this->db->escape($value['meta_description']) . "',
 				author_name = '" . $this->db->escape($value['author_name']) . "',
 				moderator_name = '" . $this->user->getUsername() . "',
-				description = '" . $this->db->escape($value['description']) . "'");
+				description = '" . $this->db->escape($value['description']) . "'";
+
+
+
+			$this->db->query($sql);
 		}
 		if ($data['keyword']) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET
@@ -29,14 +43,23 @@ class ModelFidoReviews extends Model {
 	}
 
 	public function editFaq($faq_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "reviews SET
+		$sql = "UPDATE " . DB_PREFIX . "reviews SET
 			topic_id = '" . (int)$data['topic_id'] . "',
 			status = '" . (int)$data['status'] . "',
-			sort_order = '" . (int)$data['sort_order'] . "'
-				WHERE faq_id = '" . (int)$faq_id . "'");
+			sort_order = '" . (int)$data['sort_order']."'";
+
+		if(!empty($data['date'])){
+			$sql .= ", date = '" . $this->db->escape($data['date']) . "' ";
+		}
+
+		$sql .= "WHERE faq_id = '" . (int)$faq_id . "'";
+
+
+		$this->db->query($sql);
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "reviews_description WHERE faq_id = '" . (int)$faq_id . "'");
 		foreach ($data['faq_description'] as $language_id => $value) {
+
 			$this->db->query("INSERT INTO " . DB_PREFIX . "reviews_description SET
 				faq_id = '" . (int)$faq_id . "',
 				language_id = '" . (int)$language_id . "',
@@ -93,6 +116,7 @@ class ModelFidoReviews extends Model {
 			foreach ($query->rows as $result) {
 				$faq_data[] = array(
 					'faq_id'     => $result['faq_id'],
+					'date'     => $result['date'],
 					'title'      => $this->getTopic($result['faq_id'], $this->config->get('config_language_id')),
 					'status'     => $result['status'],
 					'sort_order' => $result['sort_order']
@@ -100,7 +124,7 @@ class ModelFidoReviews extends Model {
 				$faq_data = array_merge($faq_data, $this->getFaqs($result['faq_id']));
 			}
 			//$this->cache->set('reviews.' . $this->config->get('config_language_id') . '.' . $topic_id, $faq_data);
-		}
+		};
 		return $faq_data;
 	}
 
@@ -121,10 +145,11 @@ class ModelFidoReviews extends Model {
 
 	public function getFaqDescriptions($faq_id) {
 		$faq_description_data = array();
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "reviews_description WHERE faq_id = '" . (int)$faq_id . "'");
+		$query = $this->db->query("SELECT rd.title, rd.meta_description, rd.description, rd.author_name, rd.moderator_name, rd.language_id, r.date  FROM " . DB_PREFIX . "reviews_description rd LEFT JOIN " . DB_PREFIX . "reviews r ON (rd.faq_id = r.faq_id)  WHERE rd.faq_id = '" . (int)$faq_id . "'");
 		foreach ($query->rows as $result) {
 			$faq_description_data[$result['language_id']] = array(
 				'title'            => $result['title'],
+				'date'            => $result['date'],
 				'meta_description' => $result['meta_description'],
 				'description'      => $result['description'],
 				'author_name'		=> $result['author_name'],

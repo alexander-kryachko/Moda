@@ -161,6 +161,7 @@ $controller->addPreAction(new Action('common/login/check'));
 $controller->addPreAction(new Action('error/permission/check'));
 
 // Router
+
 if (isset($request->get['route'])) {
 	$action = new Action($request->get['route']);
 } else {

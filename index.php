@@ -6,7 +6,7 @@ define('VERSION', '2.0.3.1');
 if (is_file('config.php')) {
 	require_once('config.php');
 }
-
+//setcookie ("language", "", time() - 3600);
 // Install
 if (!defined('DIR_APPLICATION')) {
 	header('Location: install/index.php');
@@ -136,12 +136,13 @@ foreach ($query->rows as $result) {
 }
 
 if (isset($session->data['language']) && array_key_exists($session->data['language'], $languages)) {
-	$code = $session->data['language'];
+	//$code = $session->data['language'];
+	$code = "en";
 } elseif (isset($request->cookie['language']) && array_key_exists($request->cookie['language'], $languages)) {
-	$code = $request->cookie['language'];
+	//$code = $request->cookie['language'];
+	$code = "en";
 } else {
 	$detect = '';
-
 	if (isset($request->server['HTTP_ACCEPT_LANGUAGE']) && $request->server['HTTP_ACCEPT_LANGUAGE']) {
 		$browser_languages = explode(',', $request->server['HTTP_ACCEPT_LANGUAGE']);
 
@@ -159,15 +160,21 @@ if (isset($session->data['language']) && array_key_exists($session->data['langua
 		}
 	}
 
-	$code = $detect ? $detect : $config->get('config_language');
+	//$code = $detect ? $detect : $config->get('config_language');
+	$code = "en";
 }
 
 if (!isset($session->data['language']) || $session->data['language'] != $code) {
 	$session->data['language'] = $code;
 }
+$session->data['language'] = $code;
+
+setcookie('language', "", time() - 60, '/', $request->server['HTTP_HOST']);
+setcookie('language', $config->get('config_language'), time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
+//setcookie('language', $config->get('config_language'), time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
 
 if (!isset($request->cookie['language']) || $request->cookie['language'] != $code) {
-	setcookie('language', $code, time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
+	//setcookie('language', $code, time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
 }
 
 $config->set('config_language_id', $languages[$code]['language_id']);

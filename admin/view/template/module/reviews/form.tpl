@@ -16,10 +16,9 @@
 			</div>
 		  <h1 class="panel-title"><i class="fa fa-edit"></i> <?php echo $heading_title; ?></h1>
 		</div>
-	
+
     <div class="panel-body">
-      
-	  
+
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form form-horizontal">
           <div class="tab-pane">
               <ul class="nav nav-tabs" id="language">
@@ -37,6 +36,15 @@
                               <?php if (isset($error_author_name[$language['language_id']])) { ?>
                                   <span class="error">Ошибка</span>
                               <?php } ?>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-2 control-label" for="input-sort_order">Дата</label>
+                          <div class="col-sm-10">
+                              <div class="input-group datetime">
+                                  <input type="text" class="form-control" data-date-format="YYYY-MM-DD HH:mm:ss" placeholder="Date" name="date" value="<?php echo isset($faq_description[$language['language_id']]['date']) ? $faq_description[$language['language_id']]['date'] : ''; ?>">
+                                  <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                              </div>
                           </div>
                       </div>
                       <div class="form-group required">
@@ -142,5 +150,9 @@
 //--></script>
 <script type="text/javascript"><!--
     $('#language a:first').tab('show');
+    $('.datetime').datetimepicker({
+        pickDate: true,
+        pickTime: true
+    });
     //--></script>
 <?php echo $footer; ?>

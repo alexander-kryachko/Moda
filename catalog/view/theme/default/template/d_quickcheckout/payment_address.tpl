@@ -141,8 +141,8 @@ $(function(){
 //--></script>
 
 <script>
-  $('#payment_address_telephone').mask('+38 (099) 999-99-99');
+  $('#payment_address_telephone').mask('+99 (999) 999-99-99');
   $(document).ready(function(){
-    $('#payment_address_telephone').mask('+38 (099) 999-99-99');
+    $('#payment_address_telephone').mask('+99 (999) 999-99-99');
   });
 </script>

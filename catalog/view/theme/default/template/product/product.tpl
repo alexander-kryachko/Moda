@@ -25,7 +25,6 @@
 		<?php $class = 'col-xs-8'; ?>
 		<?php } ?>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 thumb">
-			<button type="button" data-toggle="tooltip" class="btn btn-default wishlist<?php if ($issetwshlist) { ?> active<?php } ?>" title="<?php echo $button_wishlist; ?>" onclick="wishlist.add('<?php echo $product_id; ?>');"><i class="pe-7s-like"></i></button>
 			<?php if ($thumb || $images) { ?>
 				<ul class="thumbnails">
 
@@ -65,25 +64,32 @@
 		</div>
 		<div id="product" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 product">
 			<h1><?=$heading_title?></h1>
-			<span class="article"><?=$text_article_q.' '.$sku?></span>
-			<?php if ($review_status) { ?>
+			<span class="article"><?=$text_article_q.' '.$model?></span>
+			<button type="button" data-toggle="tooltip" class="btn btn-default wishlist<?php if ($issetwshlist) { ?> active<?php } ?>" title="<?php echo $button_wishlist; ?>" onclick="wishlist.add('<?php echo $product_id; ?>');"><i class="pe-7s-like"></i></button>
+<!--			<?php /*if ($review_status) { */?>
 			<div class="rating">
-				<?php for ($i = 1; $i <= 5; $i++) { ?>
-					<?php if ($rating < $i) { ?>
+				<?php /*for ($i = 1; $i <= 5; $i++) { */?>
+					<?php /*if ($rating < $i) { */?>
 				<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-					<?php } else { ?>
+					<?php /*} else { */?>
 				<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-					<?php } ?>
-				<?php } ?>
+					<?php /*} */?>
+				<?php /*} */?>
 			</div>
-			<?php } ?>
+			--><?php /*} */?>
 			<?php if ($price) { ?>
 			<div class="price">
-				<?php if (!$special) { ?>
-				<span><?=$price?></span>
+<!--				<?php /*if (!$special) { */?>
+				<span><?/*=$price*/?></span>
+				<?php /*} else { */?>
+				<span class="price-new"><?/*=$special*/?></span>
+				<span style="text-decoration: line-through;"><?/*=$price*/?></span>
+				--><?php /*} */?>
+				<?php if (!$discount) { ?>
+					<span><?=$price?></span>
 				<?php } else { ?>
-				<span class="price-new"><?=$special?></span>
-				<span style="text-decoration: line-through;"><?=$price?></span>
+					<span class="price-new"><?=$discount?></span>
+					<span style="text-decoration: line-through;"><?=$price?></span>
 				<?php } ?>
 				<?php if ($discounts) { ?>
 				<ul class="list-unstyled">

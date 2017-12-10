@@ -21,7 +21,6 @@
 				<div class="socailBlock hidden-xs">
 					<ul class="social-net">
 						<li class="inst"><a href="#"></a></li>
-						<li class="fb"><a href="#"></a></li>
 					</ul>
 				</div>
 			</div>
@@ -36,7 +35,6 @@
 						<li class="item1 "><a></a></li>
 						<li class="item2"><a></a></li>
 						<li class="item3"><a></a></li>
-						<li class="item4"><a></a></li>
 					</ul>
 				</div>
 				<div class="col-xs-4 pull-right">

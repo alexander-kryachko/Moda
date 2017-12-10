@@ -23,7 +23,7 @@ $_['text_account']      = 'Contact';
 $_['text_order']        = 'Order History';
 $_['text_wishlist']     = 'Wish List';
 $_['text_newsletter']   = 'Newsletter';
-$_['text_powered']      = '© 1999-2015 - official site MEMODA';
+$_['text_powered']      = '© 1999-2017 - official site MEMODA';
 
 $_['text_valid_error'] = 'E-mail address is incorrect!';
 $_['text_valid_valid'] = 'This e-mail address has already been signed.';

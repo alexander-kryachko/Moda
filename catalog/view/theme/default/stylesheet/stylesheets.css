@@ -393,7 +393,7 @@ header > .container > #menu .menu-trigger {
 }
 header > .container > #menu .logo {
   position: absolute;
-  top: 7px;
+  top: 13px;
   margin-left: 40px;
 }
 header > .container > #menu .faq {
@@ -581,6 +581,7 @@ header > .container > #menu > ul > li:hover a:before, header > .container > #men
   opacity: 1;
 }
 header > .container > #menu > ul > li > a {
+  font-family: Georgia, sans-serif;
   color: #333;
   font-size: 17px;
   text-shadow: none;
@@ -1023,9 +1024,9 @@ body.common-home #content > ul.nav li a:hover figure img {
 }
 .product-layout .product-thumb .caption h4 a {
   display: block;
-  min-height: 48px;
   color: #000;
   font-size: 16px;
+  line-height: 24px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   text-decoration: none;
@@ -1044,7 +1045,7 @@ body.common-home #content > ul.nav li a:hover figure img {
 }
 .product-layout .product-thumb .caption .price {
   line-height: 24px;
-  margin: 0 0 15px;
+  margin: 10px 0;
   text-align: center;
 }
 .product-layout .product-thumb .caption .price > span {
@@ -1052,12 +1053,15 @@ body.common-home #content > ul.nav li a:hover figure img {
   font-size: 17px;
 }
 .product-layout .product-thumb .caption .price .price-old {
+  margin-right: 10px;
+  font-size: 24px;
   color: #444;
   text-decoration: line-through;
 }
 .product-layout .product-thumb .caption .price .price-new {
+  font-size: 24px;
   color: #ff4242;
-  font-weight: 400;
+  font-weight: bold;
 }
 .product-layout .product-thumb:hover .image img {
   opacity: 1;
@@ -3270,7 +3274,7 @@ body.checkout-success #content .text_message a:hover {
 .page.product .thumb {
   position: relative;
 }
-.page.product .thumb .wishlist {
+.page.product .wishlist {
   border: none;
   background: none;
   box-shadow: none;
@@ -3280,12 +3284,12 @@ body.checkout-success #content .text_message a:hover {
   top: 15px;
   right: 30px;
 }
-.page.product .thumb .wishlist i {
+.page.product .wishlist i {
   font-size: 28px;
   text-shadow: 0 0 0;
 }
-.page.product .thumb .wishlist:hover,
-.page.product .thumb .wishlist.active {
+.page.product .wishlist:hover,
+.page.product .wishlist.active {
   color: gold;
   text-shadow: 0 0 0 gold;
 }
@@ -3570,15 +3574,14 @@ body.checkout-success #content .text_message a:hover {
   color: #000;
   font-size: 22px;
   text-shadow: none;
-  text-transform: uppercase;
   padding: 14px 0;
   margin: 0 0 25px;
-  background: #c4f0bd;
+  background: #6bb864;
   border: none;
   border-radius: 0;
 }
 .page.product .product #button-cart:hover, .add-to-cart:hover {
-  background: #a6f0a1;
+  background: #73c76c;
 }
 .page.product .product .info {
   text-decoration: none;
@@ -4401,9 +4404,41 @@ html[lang="en"] .modal.cart-popup .modal-body .content-inside .right-inside .che
   margin-left: 2px;
   margin-top: 2px;
 }
+@media (max-width: 1239px) {
+  header > .container > #menu > ul{
+    margin-left: 190px;
+  }
+  header > .container > #menu #callme-buttons{
+    margin-left: 977px;
+  }
+  header > .container > #menu #cart{
+    margin-left: 1104px;
+  }
+}
+@media (max-width: 1200px) {
+  .product-layout .product-thumb .caption .price .price-old{
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 991px) {
+  .product-thumb .price-default{
+    margin-top: 42px;
+  }
+  .page.search .mfilter-box > .mfilter-content > ul > li .mfilter-content-opts .mfilter-opts-container .mfilter-option #mfilter-opts-price-min, .page.special .mfilter-box > .mfilter-content > ul > li .mfilter-content-opts .mfilter-opts-container .mfilter-option #mfilter-opts-price-min, .page.manufacturer .mfilter-box > .mfilter-content > ul > li .mfilter-content-opts .mfilter-opts-container .mfilter-option #mfilter-opts-price-min, .page.category .mfilter-box > .mfilter-content > ul > li .mfilter-content-opts .mfilter-opts-container .mfilter-option #mfilter-opts-price-min, .page.search .mfilter-box > .mfilter-content > ul > li .mfilter-content-opts .mfilter-opts-container .mfilter-option #mfilter-opts-price-max, .page.special .mfilter-box > .mfilter-content > ul > li .mfilter-content-opts .mfilter-opts-container .mfilter-option #mfilter-opts-price-max, .page.manufacturer .mfilter-box > .mfilter-content > ul > li .mfilter-content-opts .mfilter-opts-container .mfilter-option #mfilter-opts-price-max, .page.category .mfilter-box > .mfilter-content > ul > li .mfilter-content-opts .mfilter-opts-container .mfilter-option #mfilter-opts-price-max{
+    width: 48px;
+    min-width: 48px;
+  }
+}
 @media (max-width: 800px) {
   .about-info > div img{
     width: 100px;
+  }
+}
+@media (max-width: 767px) {
+  #mfilter-opts-price-min, #mfilter-opts-price-max{
+    width: 80px;
+    min-width: 80px;
   }
 }
 @media (max-width: 490px) {
@@ -4467,4 +4502,23 @@ header #cart .thumb,
 header #cart .product-name,
 header #cart  .product-quantity{
   margin-left: 40px;
+}
+.economy{
+  font-size: 16px;
+  text-align: center;
+}
+.product-thumb .price-default{
+  display: block;
+  margin-top: 46px;
+}
+.top-seller{
+  position: absolute;
+  top: 6px;
+  left: 4px;
+  width: 102px;
+  height: 28px;
+  background: url('../image/top-seller.png') no-repeat;
+}
+.christmas{
+  margin-bottom: 35px;
 }
