@@ -46,6 +46,7 @@ $_['entry_manufacturer']     = 'Manufacturer';
 $_['entry_store']            = 'Stores';
 $_['entry_date_available']   = 'Date Available';
 $_['entry_quantity']         = 'Quantity';
+$_['entry_top']              = 'Bestseller';
 $_['entry_minimum']          = 'Minimum Quantity';
 $_['entry_stock_status']     = 'Out Of Stock Status';
 $_['entry_price']            = 'Price';

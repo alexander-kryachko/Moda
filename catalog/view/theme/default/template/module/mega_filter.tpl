@@ -45,7 +45,8 @@
 
 		<ul>
 			<?php foreach( $filters as $kfilter => $filter ) { ?>
-				<?php if(isset($filter['enabled']) && $filter['type'] == 'price') { ?>
+<!--				--><?php /*var_dump($filter); */?>
+				<?php if(isset($filter['display_live_filter'])) { ?>
 				<?php
 				
 					$base_type = empty( $filter['base_type'] ) ? $filter['type'] : $filter['base_type'];

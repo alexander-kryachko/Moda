@@ -41,7 +41,7 @@ class ModelFidoReviews extends Model {
 				fd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND
 				f2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND
 				f.status = '1'
-					ORDER BY f.sort_order");
+					ORDER BY f.date DESC");
 		return $query->rows;
 	}
 

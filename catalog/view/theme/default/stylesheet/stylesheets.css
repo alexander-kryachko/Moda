@@ -3,7 +3,7 @@
 }
 .btn.btn-black {
   color: #000;
-  text-transform: uppercase;
+/*  text-transform: uppercase;*/
   background: #fff;
   border-radius: 0;
   border: 1px solid #000;
@@ -232,6 +232,10 @@ header  .faq:hover {
   width: 20px;
   height: 20px;
   border-radius: 50%;
+}
+.wishlist span.empty,
+.faq span, header #cart > button > span.empty{
+  background: none;
 }
 header .one-chars #cart span{
   right: -7px;
@@ -1940,14 +1944,14 @@ html[lang="uk"] footer .menuBlock .contactBlock span {
 }
 .modal.cart-popup .modal-footer a.btn {
   color: #333;
-  font-size: 18px;
+  font-size: 22px;
   padding: 12px 18px;
-  background: #c4f0bd;
+  background: #6bb864;
   border: none;
   text-align: center;
 }
 .modal.cart-popup .modal-footer a.btn:hover {
-  background: #a6f0a1;
+  background: #7376c;
 }
 .modal.cart-popup .modal-footer .close {
   line-height: 1.4;
@@ -4518,6 +4522,8 @@ header #cart  .product-quantity{
   width: 102px;
   height: 28px;
   background: url('../image/top-seller.png') no-repeat;
+  z-index: 1;
+
 }
 .christmas{
   margin-bottom: 35px;

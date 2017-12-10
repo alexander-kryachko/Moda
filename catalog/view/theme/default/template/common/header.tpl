@@ -91,7 +91,7 @@
           <?php } else { ?>
             <a href="/account" class="login logged hidden-xs"><i class="fa fa-user"></i></a>
           <?php } ?>
-          <a href="/wishlist" id="wishlistCount" class="wishlist<?php if ($text_wishlist) { echo ' active'; } ?> hidden-xs hidden-sm hidden-md"><i class="pe-7s-like"></i><span><?=$text_wishlist?></span></a>
+          <a href="/wishlist" id="wishlistCount" class="wishlist<?php if ($text_wishlist) { echo ' active'; } ?> hidden-xs hidden-sm hidden-md"><i class="pe-7s-like"></i><?php if($text_wishlist > 0) { ?><span><?=$text_wishlist?></span><?php }else{ ?><span class="empty"></span><?php }?></a>
           <!--<span id="faq" class="hidden-xs"><a href="/faq" class="faq"><i class="pe-7s-help1"></i></a></span>-->
           <div id="callme-buttons">
             <!--<div class="call-min">-->

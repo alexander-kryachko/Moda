@@ -1,6 +1,6 @@
 <div id="cart" onclick="loadeds()">
 
-  <button type="button" data-toggle="dropdown" data-loading-text="<?php echo $text_loading; ?>" class="dropdown-toggle "><i class="fa fa-shopping-cart" aria-hidden="true"></i><?php if($text_items > 0){ ?><span><?php echo $text_items; ?></span> <?php }?></button>
+  <button type="button" data-toggle="dropdown" data-loading-text="<?php echo $text_loading; ?>" class="dropdown-toggle "><i class="fa fa-shopping-cart" aria-hidden="true"></i><?php if($text_items > 0){ ?><span><?php echo $text_items; ?></span> <?php }else{?><span class="empty"></span><?php }?></button>
   <ul class="dropdown-menu pull-right">
     <?php if ($products || $vouchers) { ?>
       <li id="add-scroll">
@@ -22,7 +22,7 @@
                   <br />
                   - <small><?php echo $text_recurring; ?> <?php echo $product['recurring']; ?></small>
                 <?php } ?></div>
-              <div class="product-quantity"><?php echo $product['quantity']; ?> шт.</div>
+              <div class="product-quantity"><?php echo $product['quantity']; ?> piece</div>
               <div class="text-right hidden"><?php echo $product['total']; ?></div>
             </li>
           <?php } ?>

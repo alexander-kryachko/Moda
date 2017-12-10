@@ -395,6 +395,7 @@ class ControllerCatalogProduct extends Controller {
 		$data['entry_model'] = $this->language->get('entry_model');
 		$data['entry_price'] = $this->language->get('entry_price');
 		$data['entry_quantity'] = $this->language->get('entry_quantity');
+		$data['entry_top'] = $this->language->get('entry_top');
 		$data['entry_status'] = $this->language->get('entry_status');
 
 		$data['button_copy'] = $this->language->get('button_copy');
@@ -562,6 +563,7 @@ class ControllerCatalogProduct extends Controller {
 		$data['entry_shipping'] = $this->language->get('entry_shipping');
 		$data['entry_date_available'] = $this->language->get('entry_date_available');
 		$data['entry_quantity'] = $this->language->get('entry_quantity');
+		$data['entry_top'] = $this->language->get('entry_top');
 		$data['entry_stock_status'] = $this->language->get('entry_stock_status');
 		$data['entry_price'] = $this->language->get('entry_price');
 		$data['entry_tax_class'] = $this->language->get('entry_tax_class');
@@ -950,6 +952,14 @@ class ControllerCatalogProduct extends Controller {
 			$data['minimum'] = $product_info['minimum'];
 		} else {
 			$data['minimum'] = 1;
+		}
+
+		if (isset($this->request->post['top'])) {
+			$data['top'] = $this->request->post['top'];
+		} elseif (!empty($product_info)) {
+			$data['top'] = $product_info['top'];
+		} else {
+			$data['top'] = 0;
 		}
 
 		if (isset($this->request->post['subtract'])) {

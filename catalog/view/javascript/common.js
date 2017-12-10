@@ -452,10 +452,11 @@ var cart = {
 
 				if (json['success']) {
 					// $('#content').parent().before('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-					// $('html, body').animate({scrollTop: 0}, 'slow');
+					//$('html, body').animate({scrollTop: 0}, 'slow');
 
 					setTimeout(function () { // Need to set timeout otherwise it wont update the total
-						$('#cart > button span').html(json['total']);
+						console.log(json['total'])
+						$('#cart > button span').removeClass('empty').html(json['total']);
 					}, 100);
 
 					$('#cart > ul').load('index.php?route=common/cart/info ul li');
@@ -589,7 +590,7 @@ var wishlist = {
 				}
 
 				$('button.wishlist').attr('data-original-title', json['total_in_wishlist']);
-				$('#wishlistCount span').html(json['total']);
+				$('#wishlistCount span').removeClass('empty').html(json['total']);
 
 				$('html, body').animate({scrollTop: 0}, 'slow');
 			}

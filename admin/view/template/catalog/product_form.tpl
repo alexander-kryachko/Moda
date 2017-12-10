@@ -130,37 +130,37 @@
                   <input type="text" name="sku" value="<?php echo $sku; ?>" placeholder="<?php echo $entry_sku; ?>" id="input-sku" class="form-control" />
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group" style="display: none">
                 <label class="col-sm-2 control-label" for="input-upc"><span data-toggle="tooltip" title="<?php echo $help_upc; ?>"><?php echo $entry_upc; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="upc" value="<?php echo $upc; ?>" placeholder="<?php echo $entry_upc; ?>" id="input-upc" class="form-control" />
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group"  style="display: none">
                 <label class="col-sm-2 control-label" for="input-ean"><span data-toggle="tooltip" title="<?php echo $help_ean; ?>"><?php echo $entry_ean; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="ean" value="<?php echo $ean; ?>" placeholder="<?php echo $entry_ean; ?>" id="input-ean" class="form-control" />
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group"  style="display: none">
                 <label class="col-sm-2 control-label" for="input-jan"><span data-toggle="tooltip" title="<?php echo $help_jan; ?>"><?php echo $entry_jan; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="jan" value="<?php echo $jan; ?>" placeholder="<?php echo $entry_jan; ?>" id="input-jan" class="form-control" />
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group"  style="display: none">
                 <label class="col-sm-2 control-label" for="input-isbn"><span data-toggle="tooltip" title="<?php echo $help_isbn; ?>"><?php echo $entry_isbn; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="isbn" value="<?php echo $isbn; ?>" placeholder="<?php echo $entry_isbn; ?>" id="input-isbn" class="form-control" />
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group" style="display: none">
                 <label class="col-sm-2 control-label" for="input-mpn"><span data-toggle="tooltip" title="<?php echo $help_mpn; ?>"><?php echo $entry_mpn; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="mpn" value="<?php echo $mpn; ?>" placeholder="<?php echo $entry_mpn; ?>" id="input-mpn" class="form-control" />
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group" style="display: none">
                 <label class="col-sm-2 control-label" for="input-location"><?php echo $entry_location; ?></label>
                 <div class="col-sm-10">
                   <input type="text" name="location" value="<?php echo $location; ?>" placeholder="<?php echo $entry_location; ?>" id="input-location" class="form-control" />
@@ -172,7 +172,7 @@
                   <input type="text" name="price" value="<?php echo $price; ?>" placeholder="<?php echo $entry_price; ?>" id="input-price" class="form-control" />
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group" style="display: none">
                 <label class="col-sm-2 control-label" for="input-tax-class"><?php echo $entry_tax_class; ?></label>
                 <div class="col-sm-10">
                   <select name="tax_class_id" id="input-tax-class" class="form-control">
@@ -193,6 +193,18 @@
                   <input type="text" name="quantity" value="<?php echo $quantity; ?>" placeholder="<?php echo $entry_quantity; ?>" id="input-quantity" class="form-control" />
                 </div>
               </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-top"><?php echo $entry_top; ?></label>
+                <div class="col-sm-10">
+                  <?php if($top == 1){?>
+                  <input type="checkbox" name="top" checked id="input-top" class="form-control" />
+                  <?php }else{?>
+                    <input type="checkbox" name="top" id="input-top" class="form-control" />
+                  <?php }?>
+                </div>
+              </div>
+
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-minimum"><span data-toggle="tooltip" title="<?php echo $help_minimum; ?>"><?php echo $entry_minimum; ?></span></label>
                 <div class="col-sm-10">
@@ -227,7 +239,7 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group" style="display: none">
                 <label class="col-sm-2 control-label"><?php echo $entry_shipping; ?></label>
                 <div class="col-sm-10">
                   <label class="radio-inline">
@@ -374,7 +386,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group" style="display: none;">
                 <label class="col-sm-2 control-label"><?php echo $entry_store; ?></label>
                 <div class="col-sm-10">
                   <div class="well well-sm" style="height: 150px; overflow: auto;">
@@ -406,8 +418,8 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-download"><span data-toggle="tooltip" title="<?php echo $help_download; ?>"><?php echo $entry_download; ?></span></label>
-                <div class="col-sm-10">
+                <label class="col-sm-2 control-label" for="input-download" style="display: none"><span data-toggle="tooltip" title="<?php echo $help_download; ?>"><?php echo $entry_download; ?></span></label>
+                <div class="col-sm-10" style="display: none">
                   <input type="text" name="download" value="" placeholder="<?php echo $entry_download; ?>" id="input-download" class="form-control" />
                   <div id="product-download" class="well well-sm" style="height: 150px; overflow: auto;">
                     <?php foreach ($product_downloads as $product_download) { ?>

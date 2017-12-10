@@ -424,7 +424,7 @@ echo "</pre>";*/
 		if (!$product_data) {
 			$product_data = array();
 
-			$query = $this->db->query("SELECT op.product_id, SUM(op.quantity) AS total FROM " . DB_PREFIX . "order_product op LEFT JOIN `" . DB_PREFIX . "order` o ON (op.order_id = o.order_id) LEFT JOIN `" . DB_PREFIX . "product` p ON (op.product_id = p.product_id)
+			/*$query = $this->db->query("SELECT op.product_id, SUM(op.quantity) AS total FROM " . DB_PREFIX . "order_product op LEFT JOIN `" . DB_PREFIX . "order` o ON (op.order_id = o.order_id) LEFT JOIN `" . DB_PREFIX . "product` p ON (op.product_id = p.product_id)
 			LEFT JOIN " . DB_PREFIX . "product_to_store p2s
 				ON (p.product_id = p2s.product_id)
 
@@ -440,6 +440,26 @@ echo "</pre>";*/
 				AND (pcat.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' OR ISNULL(pcat.customer_group_id) OR pcat.customer_group_id = '1')
 				GROUP BY op.product_id
 				ORDER BY total DESC
+				LIMIT " . (int)$limit);*/
+
+
+
+
+			$query = $this->db->query("SELECT *  FROM `" . DB_PREFIX . "product` p
+			LEFT JOIN " . DB_PREFIX . "product_to_store p2s
+				ON (p.product_id = p2s.product_id)
+
+			LEFT JOIN " . DB_PREFIX . "product_to_category p2c
+				ON (p.product_id = p2c.product_id)
+			LEFT JOIN " . DB_PREFIX . "category pcat
+				ON (p2c.category_id = pcat.category_id)
+
+
+				WHERE p.status = '1'
+				AND p.top = '1'
+				AND p.date_available <= NOW()
+				AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'
+				AND (pcat.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' OR ISNULL(pcat.customer_group_id) OR pcat.customer_group_id = '1')
 				LIMIT " . (int)$limit);
 
 			foreach ($query->rows as $result) {
@@ -448,6 +468,8 @@ echo "</pre>";*/
 
 			$this->cache->set('product.bestseller.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . $this->config->get('config_customer_group_id') . '.' . (int)$limit, $product_data);
 		}
+
+
 
 		return $product_data;
 	}
