@@ -17,9 +17,9 @@
             <a href="<?=$account?>"><?=$text_login?></a>
             <a href="<?=$register?>"><?=$text_register?></a>
         </div>
-        <ul class="social-net">
+        <!--<ul class="social-net">
             <li class="inst"><a href="#"></a></li>
-        </ul>
+        </ul>-->
     </div>
 </div>
 </div>

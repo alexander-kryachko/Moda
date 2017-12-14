@@ -66,6 +66,7 @@
 			<h1><?=$heading_title?></h1>
 			<span class="article"><?=$text_article_q.' '.$model?></span>
 			<button type="button" data-toggle="tooltip" class="btn btn-default wishlist<?php if ($issetwshlist) { ?> active<?php } ?>" title="<?php echo $button_wishlist; ?>" onclick="wishlist.add('<?php echo $product_id; ?>');"><i class="pe-7s-like"></i></button>
+			
 <!--			<?php /*if ($review_status) { */?>
 			<div class="rating">
 				<?php /*for ($i = 1; $i <= 5; $i++) { */?>
@@ -130,7 +131,7 @@
 				</div>
 			</div><?php } ?>
 			<?php if ($attribute_groups) { ?><div class="attribute-block" style="margin-top: -1px;">
-				<div class="title"><span><?=$text_features_table?></span> <i class="pe-7s-angle-down down"></i><i class="pe-7s-angle-up up"></i></div>
+				<!--<div class="title"><span><?/*=$text_features_table*/?></span> <i class="pe-7s-angle-down down"></i><i class="pe-7s-angle-up up"></i></div>-->
 				<div class="text slidingDiv">
 					<?php echo $table_size; ?>
 				</div>
@@ -210,6 +211,21 @@
 				<input type="hidden" name="quantity" value="<?php echo $minimum; ?>" size="2" id="input-quantity" class="form-control" />
 				<input type="hidden" name="product_id" value="<?php echo $product_id; ?>" />
 				<button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block" data-title="<?php echo $heading_title ?>" data-target="#modal-cart"><?php echo $button_cart; ?></button>
+				<div class="about-info checkout">
+					<div><img alt="" src="image/catalog/team_min1.png">
+						<?php echo $first_trigger; ?>
+					</div>
+					<div><img alt="" src="image/catalog/team_min2.png">
+						<<?php echo $second_trigger; ?>
+
+					</div>
+					<div><img alt="" src="image/catalog/team_min3.png">
+						<?php echo $third_trigger; ?>
+					</div>
+					<div><img alt="" src="image/catalog/team_min4.png">
+						<?php echo $four_trigger; ?>
+					</div>
+				</div>
 			</div>
 			<?php if ($minimum > 1) { ?>
 				<div class="alert alert-info"><i class="fa fa-info-circle"></i> <?=$text_minimum?></div>

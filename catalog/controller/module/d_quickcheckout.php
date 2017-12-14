@@ -318,6 +318,16 @@ class ControllerModuleDQuickcheckout extends Controller {
 				$this->data['settings'] = $this->settings;
 				$this->data['checkout'] = $this->session->data;
 
+
+
+				$this->load->language('common/maintenance');
+
+				$this->data['first_trigger'] = $this->language->get('first_trigger');
+				$this->data['second_trigger'] = $this->language->get('second_trigger');
+				$this->data['third_trigger'] = $this->language->get('third_trigger');
+				$this->data['four_trigger'] = $this->language->get('four_trigger');
+
+
 				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/d_quickcheckout.tpl')) {
 					$this->template = $this->config->get('config_template') . '/template/module/d_quickcheckout.tpl';
 				} else {
@@ -645,6 +655,8 @@ class ControllerModuleDQuickcheckout extends Controller {
 
 	private function get_field_view($data){
 		$data['settings'] =  $this->settings;
+
+		$data['third_trigger'] = 1;
 
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/d_quickcheckout/field.tpl')) {
@@ -1947,6 +1959,9 @@ class ControllerModuleDQuickcheckout extends Controller {
 				$data['affiliate_id'] = 0;
 				$data['commission'] = 0;
 			}
+
+
+
 			
 			$data['language_id'] = $this->config->get('config_language_id');
 			$data['currency_id'] = $this->currency->getId();

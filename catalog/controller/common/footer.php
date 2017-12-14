@@ -93,6 +93,9 @@ class ControllerCommonFooter extends Controller {
 		$data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
 		$data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
 
+		$data['language'] = $this->load->controller('common/language');
+		$data['languagese'] = $this->language->getGroupData();
+
 		$data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
 
 		$data['content_footer'] = $this->load->controller('common/content_footer');

@@ -71,6 +71,9 @@ class ControllerCheckoutPaymentMethod extends Controller {
 		$data['text_comments'] = $this->language->get('text_comments');
 		$data['text_loading'] = $this->language->get('text_loading');
 
+
+
+
 		$data['button_continue'] = $this->language->get('button_continue');
 
 		if (empty($this->session->data['payment_methods'])) {

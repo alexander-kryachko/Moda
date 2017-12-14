@@ -65,16 +65,17 @@
 </div>
 <div class="about-info2" style="display: none;">
 	<div><img alt="" src="image/catalog/team_min1.png">
-		<p>Более 5 000<br> довольных<br> клиентов</p>
+		<?php echo $first_trigger; ?>
 	</div>
 	<div><img alt="" src="image/catalog/team_min2.png">
-		<p>Работаем с<br> 1999 года</p>
+		<?php echo $second_trigger; ?>
+
 	</div>
 	<div><img alt="" src="image/catalog/team_min3.png">
-		<p>Высокое<br> качество меха</p>
+		<?php echo $third_trigger; ?>
 	</div>
 	<div><img alt="" src="image/catalog/team_min4.png">
-		<p>Собственное<br> производство</p>
+		<?php echo $four_trigger; ?>
 	</div>
 </div>
 <script><!--

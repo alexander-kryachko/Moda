@@ -1,233 +1,176 @@
 <?php
-/**
- * Liqpay Payment Module
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- *
- * @category        Liqpay
- * @package         Payment
- * @version         3.0
- * @author          Liqpay
- * @copyright       Copyright (c) 2014 Liqpay
- * @license         http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- *
- * EXTENSION INFORMATION
- *
- * OpenCart         1.5.6
- * LiqPay API       https://www.liqpay.com/ru/doc
- *
- */
+class ControllerExtensionPaymentLiqPay extends Controller {
+    private $error = array();
 
-/**
- * Payment method liqpay controller (admin)
- *
- * @author      Liqpay <support@liqpay.com>
- */
-class ControllerPaymentLiqPay extends Controller
-{
-	private $error = array();
+    public function index() {
+		var_dump(5);
+		die();
+        $this->load->language('extension/payment/liqpay');
 
+        $this->document->setTitle($this->language->get('heading_title'));
 
-    /**
-     * Index action
-     *
-     * @return void
-     */
- 	public function index()
-	{
-		$this->language->load('payment/liqpay');
+        $this->load->model('setting/setting');
 
-		$this->document->setTitle($this->language->get('heading_title'));
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+            $this->model_setting_setting->editSetting('liqpay', $this->request->post);
 
-		$this->load->model('setting/setting');
+            $this->session->data['success'] = $this->language->get('text_success');
 
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('liqpay', $this->request->post);
+            $this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true));
+        }
 
-			$this->session->data['success'] = $this->language->get('text_success');
+        $data['heading_title'] = $this->language->get('heading_title');
 
-			$this->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
-		}
+        $data['text_edit'] = $this->language->get('text_edit');
+        $data['text_enabled'] = $this->language->get('text_enabled');
+        $data['text_disabled'] = $this->language->get('text_disabled');
+        $data['text_all_zones'] = $this->language->get('text_all_zones');
+        $data['text_paybox'] = $this->language->get('text_paybox');
+        $data['text_sandbox'] = $this->language->get('text_sandbox');
 
-		$this->data['heading_title'] = $this->language->get('heading_title');
+        $data['entry_merchant'] = $this->language->get('entry_merchant');
+        $data['entry_signature'] = $this->language->get('entry_signature');
+        $data['entry_type'] = $this->language->get('entry_type');
+        $data['entry_sandbox'] = $this->language->get('entry_sandbox');
+        $data['entry_total'] = $this->language->get('entry_total');
+        $data['entry_success'] = $this->language->get('entry_success');
+        $data['entry_failure'] = $this->language->get('entry_failure');
+        $data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
+        $data['entry_status'] = $this->language->get('entry_status');
+        $data['entry_sort_order'] = $this->language->get('entry_sort_order');
 
-		$this->data['text_enabled'] = $this->language->get('text_enabled');
-		$this->data['text_disabled'] = $this->language->get('text_disabled');
-		$this->data['text_all_zones'] = $this->language->get('text_all_zones');
-		$this->data['text_buy'] = $this->language->get('text_buy');
-		$this->data['text_donate'] = $this->language->get('text_donate');
+        $data['help_total'] = $this->language->get('help_total');
 
-		$this->data['entry_public_key'] = $this->language->get('entry_public_key');
-		$this->data['entry_private_key'] = $this->language->get('entry_private_key');
-		$this->data['entry_action'] = $this->language->get('entry_action');
-		$this->data['entry_type'] = $this->language->get('entry_type');
-		$this->data['entry_total'] = $this->language->get('entry_total');
-		$this->data['entry_order_status'] = $this->language->get('entry_order_status');
-		$this->data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
-		$this->data['entry_status'] = $this->language->get('entry_status');
-		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
-		$this->data['entry_pay_way'] = $this->language->get('entry_pay_way');
-		$this->data['entry_language'] = $this->language->get('entry_language');
+        $data['button_save'] = $this->language->get('button_save');
+        $data['button_cancel'] = $this->language->get('button_cancel');
 
-		$this->data['button_save'] = $this->language->get('button_save');
-		$this->data['button_cancel'] = $this->language->get('button_cancel');
+        if (isset($this->error['warning'])) {
+            $data['error_warning'] = $this->error['warning'];
+        } else {
+            $data['error_warning'] = '';
+        }
 
-		if (isset($this->error['warning'])) {
-			$this->data['error_warning'] = $this->error['warning'];
-		} else {
-			$this->data['error_warning'] = '';
-		}
+        if (isset($this->error['merchant'])) {
+            $data['error_merchant'] = $this->error['merchant'];
+        } else {
+            $data['error_merchant'] = '';
+        }
 
-		if (isset($this->error['public_key'])) {
-			$this->data['error_public_key'] = $this->error['public_key'];
-		} else {
-			$this->data['error_public_key'] = '';
-		}
+        if (isset($this->error['signature'])) {
+            $data['error_signature'] = $this->error['signature'];
+        } else {
+            $data['error_signature'] = '';
+        }
 
-		if (isset($this->error['private_key'])) {
-			$this->data['error_private_key'] = $this->error['private_key'];
-		} else {
-			$this->data['error_private_key'] = '';
-		}
+        if (isset($this->error['type'])) {
+            $data['error_type'] = $this->error['type'];
+        } else {
+            $data['error_type'] = '';
+        }
 
-		if (isset($this->error['action'])) {
-			$this->data['error_action'] = $this->error['action'];
-		} else {
-			$this->data['error_action'] = '';
-		}
+        $data['breadcrumbs'] = array();
 
-		$this->data['breadcrumbs'] = array();
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('text_home'),
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
+        );
 
-		$this->data['breadcrumbs'][] = array(
-			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
-			'separator' => false
-		);
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('text_extension'),
+            'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true)
+        );
 
-		$this->data['breadcrumbs'][] = array(
-			'text'      => $this->language->get('text_payment'),
-			'href'      => $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'),
-			'separator' => ' :: '
-		);
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('heading_title'),
+            'href' => $this->url->link('extension/payment/liqpay', 'token=' . $this->session->data['token'], true)
+        );
 
-		$this->data['breadcrumbs'][] = array(
-			'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('payment/liqpay', 'token=' . $this->session->data['token'], 'SSL'),
-			'separator' => ' :: '
-		);
+        $data['action'] = $this->url->link('extension/payment/liqpay', 'token=' . $this->session->data['token'], true);
 
-		$this->data['action'] = $this->url->link('payment/liqpay', 'token=' . $this->session->data['token'], 'SSL');
+        $data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true);
 
-		$this->data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
+        if (isset($this->request->post['liqpay_merchant'])) {
+            $data['liqpay_merchant'] = $this->request->post['liqpay_merchant'];
+        } else {
+            $data['liqpay_merchant'] = $this->config->get('liqpay_merchant');
+        }
 
-		if (isset($this->request->post['liqpay_public_key'])) {
-			$this->data['liqpay_public_key'] = $this->request->post['liqpay_public_key'];
-		} else {
-			$this->data['liqpay_public_key'] = $this->config->get('liqpay_public_key');
-		}
+        if (isset($this->request->post['liqpay_signature'])) {
+            $data['liqpay_signature'] = $this->request->post['liqpay_signature'];
+        } else {
+            $data['liqpay_signature'] = $this->config->get('liqpay_signature');
+        }
 
-		if (isset($this->request->post['liqpay_private_key'])) {
-			$this->data['liqpay_private_key'] = $this->request->post['liqpay_private_key'];
-		} else {
-			$this->data['liqpay_private_key'] = $this->config->get('liqpay_private_key');
-		}
+        if (isset($this->request->post['liqpay_sandbox'])) {
+            $data['liqpay_sandbox'] = $this->request->post['liqpay_sandbox'];
+        } else {
+            $data['liqpay_sandbox'] = $this->config->get('liqpay_sandbox');
+        }
 
-		if (isset($this->request->post['liqpay_action'])) {
-			$this->data['liqpay_action'] = $this->request->post['liqpay_action'];
-		} else {
-			$this->data['liqpay_action'] = $this->config->get('liqpay_action');
-			if (empty($this->data['liqpay_action'])) {
-				$this->data['liqpay_action'] = 'https://www.liqpay.com/api/3/checkout';
-			}
-		}
+        if (isset($this->request->post['liqpay_total'])) {
+            $data['liqpay_total'] = $this->request->post['liqpay_total'];
+        } else {
+            $data['liqpay_total'] = $this->config->get('liqpay_total');
+        }
 
-		if (isset($this->request->post['liqpay_total'])) {
-			$this->data['liqpay_total'] = $this->request->post['liqpay_total'];
-		} else {
-			$this->data['liqpay_total'] = $this->config->get('liqpay_total');
-		}
+        if (isset($this->request->post['liqpay_success_status_id'])) {
+            $data['liqpay_success_status_id'] = $this->request->post['liqpay_success_status_id'];
+        } else {
+            $data['liqpay_success_status_id'] = $this->config->get('liqpay_success_status_id');
+        }
 
-		if (isset($this->request->post['liqpay_order_status_id'])) {
-			$this->data['liqpay_order_status_id'] = $this->request->post['liqpay_order_status_id'];
-		} else {
-			$this->data['liqpay_order_status_id'] = $this->config->get('liqpay_order_status_id');
-		}
+        if (isset($this->request->post['liqpay_failure_status_id'])) {
+            $data['liqpay_failure_status_id'] = $this->request->post['liqpay_failure_status_id'];
+        } else {
+            $data['liqpay_failure_status_id'] = $this->config->get('liqpay_failure_status_id');
+        }
 
-		$this->load->model('localisation/order_status');
+        $this->load->model('localisation/order_status');
 
-		$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
+        $data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
-		if (isset($this->request->post['liqpay_geo_zone_id'])) {
-			$this->data['liqpay_geo_zone_id'] = $this->request->post['liqpay_geo_zone_id'];
-		} else {
-			$this->data['liqpay_geo_zone_id'] = $this->config->get('liqpay_geo_zone_id');
-		}
+        if (isset($this->request->post['liqpay_geo_zone_id'])) {
+            $data['liqpay_geo_zone_id'] = $this->request->post['liqpay_geo_zone_id'];
+        } else {
+            $data['liqpay_geo_zone_id'] = $this->config->get('liqpay_geo_zone_id');
+        }
 
-		$this->load->model('localisation/geo_zone');
+        $this->load->model('localisation/geo_zone');
 
-		$this->data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
+        $data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
 
-		if (isset($this->request->post['liqpay_status'])) {
-			$this->data['liqpay_status'] = $this->request->post['liqpay_status'];
-		} else {
-			$this->data['liqpay_status'] = $this->config->get('liqpay_status');
-		}
+        if (isset($this->request->post['liqpay_status'])) {
+            $data['liqpay_status'] = $this->request->post['liqpay_status'];
+        } else {
+            $data['liqpay_status'] = $this->config->get('liqpay_status');
+        }
 
-		if (isset($this->request->post['liqpay_sort_order'])) {
-			$this->data['liqpay_sort_order'] = $this->request->post['liqpay_sort_order'];
-		} else {
-			$this->data['liqpay_sort_order'] = $this->config->get('liqpay_sort_order');
-		}
+        if (isset($this->request->post['liqpay_sort_order'])) {
+            $data['liqpay_sort_order'] = $this->request->post['liqpay_sort_order'];
+        } else {
+            $data['liqpay_sort_order'] = $this->config->get('liqpay_sort_order');
+        }
 
-		if (isset($this->request->post['liqpay_pay_way'])) {
-			$this->data['liqpay_pay_way'] = $this->request->post['liqpay_pay_way'];
-		} else {
-			$this->data['liqpay_pay_way'] = $this->config->get('liqpay_pay_way');
-		}
+        $data['header'] = $this->load->controller('common/header');
+        $data['column_left'] = $this->load->controller('common/column_left');
+        $data['footer'] = $this->load->controller('common/footer');
 
-		if (isset($this->request->post['liqpay_language'])) {
-			$this->data['liqpay_language'] = $this->request->post['liqpay_language'];
-		} else {
-			$this->data['liqpay_language'] = $this->config->get('liqpay_language');
-		}
+        $this->response->setOutput($this->load->view('extension/payment/liqpay', $data));
+    }
 
-		$this->template = 'payment/liqpay.tpl';
-		$this->children = array(
-			'common/header',
-			'common/footer'
-		);
+    protected function validate() {
+        if (!$this->user->hasPermission('modify', 'extension/payment/liqpay')) {
+            $this->error['warning'] = $this->language->get('error_permission');
+        }
 
-		$this->response->setOutput($this->render());
-	}
+        if (!$this->request->post['liqpay_merchant']) {
+            $this->error['merchant'] = $this->language->get('error_merchant');
+        }
 
+        if (!$this->request->post['liqpay_signature']) {
+            $this->error['signature'] = $this->language->get('error_signature');
+        }
 
-    /**
-     * Validate input data
-     *
-     * @return boolean
-     */
-	protected function validate()
-	{
-		if (!$this->user->hasPermission('modify', 'payment/liqpay')) {
-			$this->error['warning'] = $this->language->get('error_permission');
-		}
-
-		if (!$this->request->post['liqpay_public_key']) {
-			$this->error['public_key'] = $this->language->get('error_public_key');
-		}
-
-		if (!$this->request->post['liqpay_private_key']) {
-			$this->error['private_key'] = $this->language->get('error_private_key');
-		}
-
-		if (!$this->request->post['liqpay_action']) {
-			$this->error['action'] = $this->language->get('error_action');
-		}
-
-		return !$this->error;
-	}
+        return !$this->error;
+    }
 }

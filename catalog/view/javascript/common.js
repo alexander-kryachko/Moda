@@ -325,9 +325,12 @@ $(document).ready(function () {
 		e.preventDefault();
 
 		$('#language input[name=\'code\']').attr('value', $(this).attr('href'));
-
 		$('#language').submit();
 	});
+
+	/** Sale */
+
+	$('nav#menu ul li:last-child').addClass('sale');
 
 	/* Search */
 	$('#search input[name=\'search\']').parent().find('button').on('click', function () {

@@ -30,8 +30,8 @@
   <script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
   <link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
-  <link href="catalog/view/theme/default/stylesheet/stylesheet.css?ver=1.3" rel="stylesheet">
-  <link href="catalog/view/theme/default/stylesheet/stylesheets.css?ver=2.1" rel="stylesheet">
+  <link href="catalog/view/theme/default/stylesheet/stylesheet.css?ver=2.3" rel="stylesheet">
+  <link href="catalog/view/theme/default/stylesheet/stylesheets.css?ver=2.2" rel="stylesheet">
   <link href="catalog/view/theme/default/stylesheet/pe-icon-7-stroke.css" rel="stylesheet">
 
   <!-- jcf scripts and styles -->
@@ -85,7 +85,7 @@
           <a href="<?php echo $home; ?>" class="logo"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" /></a>
         </div>
         <div class="col-xs-4 pull-right last-chars">
-          <?php //echo $language; ?>
+
           <?php if (!$logged) { ?>
             <a class="login hidden-xs" id="option_login_popup_trigger" data-toggle="modal" data-target="#option_login_popup"><i class="fa fa-user"></i></a>
           <?php } else { ?>

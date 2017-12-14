@@ -41,7 +41,7 @@ class ControllerPaymentLiqpay extends Controller
 
         $order_id = $this->session->data['order_id'];
         /*set order_id to global variable*/
-        $this->data['order_id'] = $this->session->data['order_id'];
+        $data['order_id'] = $this->session->data['order_id'];
 
         $order_info = $this->model_checkout_order->getOrder($order_id);
 
@@ -87,11 +87,11 @@ class ControllerPaymentLiqpay extends Controller
 
         $signature = base64_encode(sha1($private_key.$data.$private_key, 1));
 
-        $this->data['action']         = $this->config->get('liqpay_action');
-        $this->data['signature']      = $signature;
-        $this->data['data']           = $data;
-        $this->data['button_confirm'] = 'Оплатить';
-        $this->data['url_confirm']    = $this->url->link('payment/liqpay/confirm', '', 'SSL');
+        $data['action']         = $this->config->get('liqpay_action');
+        $data['signature']      = $signature;
+        $data['data']           = $data;
+        $data['button_confirm'] = 'Оплатить';
+        $data['url_confirm']    = $this->url->link('payment/liqpay/confirm', '', 'SSL');
         
         $this->template = $this->config->get('config_template').'/template/payment/liqpay.tpl';
 
@@ -99,7 +99,7 @@ class ControllerPaymentLiqpay extends Controller
             $this->template = 'default/template/payment/liqpay.tpl';
         }
 
-        $this->render();
+        return $this->load->view('default/template/payment/cod.tpl', $data);
     }
 
 

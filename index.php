@@ -140,7 +140,7 @@ if (isset($session->data['language']) && array_key_exists($session->data['langua
 	$code = "en";
 } elseif (isset($request->cookie['language']) && array_key_exists($request->cookie['language'], $languages)) {
 	//$code = $request->cookie['language'];
-	$code = "en";
+	$code = "ru";
 } else {
 	$detect = '';
 	if (isset($request->server['HTTP_ACCEPT_LANGUAGE']) && $request->server['HTTP_ACCEPT_LANGUAGE']) {

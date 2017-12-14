@@ -4,6 +4,12 @@ class ControllerProductProduct extends Controller {
 
 	public function index() {
 		$this->load->language('product/product');
+		$this->load->language('common/maintenance');
+
+		$data['first_trigger'] = $this->language->get('first_trigger');
+		$data['second_trigger'] = $this->language->get('second_trigger');
+		$data['third_trigger'] = $this->language->get('third_trigger');
+		$data['four_trigger'] = $this->language->get('four_trigger');
 
 		$data['breadcrumbs'] = array();
 

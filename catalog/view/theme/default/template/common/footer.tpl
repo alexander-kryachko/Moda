@@ -19,9 +19,6 @@
 					<button type="button" data-loading-text="<?php /*echo $text_loading; */?>" id="reg_email_submit"><?/*=$text_sitemap*/?></button>
 				</div>-->
 				<div class="socailBlock hidden-xs">
-					<ul class="social-net">
-						<li class="inst"><a href="#"></a></li>
-					</ul>
 				</div>
 			</div>
 			<div class="copyBlock clearfix">
@@ -38,7 +35,7 @@
 					</ul>
 				</div>
 				<div class="col-xs-4 pull-right">
-
+					<?php echo $language; ?>
 				</div>
 			</div>
 		</div>

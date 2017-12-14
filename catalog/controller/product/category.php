@@ -348,14 +348,14 @@ class ControllerProductCategory extends Controller {
 
 				$data['sorts'][] = array(
 					'text'  => $this->language->get('text_default'),
-					'value' => 'p.sort_order-ASC',
-					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.sort_order&order=ASC' . $url)
+					'value' => 'p.sort_order-DESC',
+					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.sort_order&order=DESC' . $url)
 				);
 
 				$data['sorts'][] = array(
 					'text'  => $this->language->get('text_name_asc'),
-					'value' => 'pd.name-ASC',
-					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=pd.name&order=ASC' . $url)
+					'value' => 'pd.name-DESC',
+					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=pd.name&order=DESC' . $url)
 				);
 
 				/*$data['sorts'][] = array(
@@ -366,21 +366,21 @@ class ControllerProductCategory extends Controller {
 
 				$data['sorts'][] = array(
 					'text'  => $this->language->get('text_price_asc'),
-					'value' => 'p.price-ASC',
-					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.price&order=ASC' . $url)
+					'value' => 'p.price-DESC',
+					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.price&order=DESC' . $url)
 				);
 
 				$data['sorts'][] = array(
 					'text'  => $this->language->get('text_price_desc'),
-					'value' => 'p.price-DESC',
-					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.price&order=DESC' . $url)
+					'value' => 'p.price-ASC',
+					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.price&order=ASC' . $url)
 				);
 
 				if ($this->config->get('config_review_status')) {
 					$data['sorts'][] = array(
 						'text'  => $this->language->get('text_rating_desc'),
-						'value' => 'rating-DESC',
-						'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=DESC' . $url)
+						'value' => 'rating-ASC',
+						'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=ASC' . $url)
 					);
 
 					/*$data['sorts'][] = array(
